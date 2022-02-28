@@ -1,37 +1,58 @@
-using System;
-using System.Collections.Generic;
-using Primes.Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 namespace Primes
 {
   public class Program
   {
-    public static void Main()
+    public static void Main(string[] args)
     {
-      Console.WriteLine("Enter a number");
-      int input = int.Parse(Console.ReadLine());
-      List<int> numList = new List<int>();
-      for (int x = 2; x <= input; x++)
-      {
-        numList.Add(x);
-      }
-      for (int n = 2; n <= input; n++)
-      {
-        for (int x = 2; x < n; x++)
-        {
-          if ((n % x) == 0)
-          {
-            numList.Remove(n);
-          }
-        }
-      }
-      numList.Sort();
-      foreach (int number in numList)
-      {
-        Console.WriteLine(number);
-      }
+      var host = new WebHostBuilder()
+        .UseKestrel()
+        .UseContentRoot(Directory.GetCurrentDirectory())
+        .UseIISIntegration()
+        .UseStartup<Startup>()
+        .Build();
+
+      host.Run();
     }
   }
 }
+
+// using System;
+// using System.Collections.Generic;
+// using Primes.Models;
+// namespace Primes
+// {
+//   public class Program
+//   {
+//     public static void Main()
+//     {
+//       Console.WriteLine("Enter a number");
+//       int input = int.Parse(Console.ReadLine());
+//       List<int> numList = new List<int>();
+//       for (int x = 2; x <= input; x++)
+//       {
+//         numList.Add(x);
+//       }
+//       for (int n = 2; n <= input; n++)
+//       {
+//         for (int x = 2; x < n; x++)
+//         {
+//           if ((n % x) == 0)
+//           {
+//             numList.Remove(n);
+//           }
+//         }
+//       }
+//       numList.Sort();
+//       foreach (int number in numList)
+//       {
+//         Console.WriteLine(number);
+//       }
+//     }
+//   }
+// }
 
 
 
